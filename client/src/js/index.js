@@ -11,14 +11,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { initDB } from "./database.js";
 
 // import src/images files
-// import Logo from "../images/logo.png";
+import Logo from "../images/logo.png";
 import Bear from "../images/bear.png";
 import Dog from "../images/dog.png";
-import Bird from "../images/bird.jpg";
+// import Bird from "../images/bird.jpg";
 
 window.addEventListener('load', function() {
     initDB();
-    document.getElementById('logo').src = Bird;
+    document.getElementById('logo').src = Logo;
     document.getElementById('bearThumbnail').src = Bear;
     document.getElementById('dogThumbnail').src = Dog;
 

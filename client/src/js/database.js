@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime';
 
 
 export const initDB = async () => {
+    // (database name, version #)
     openDB('contact_db', 1, {
         upgrade(db) {
             if (db.objectStoreNames.contains('contacts')) {

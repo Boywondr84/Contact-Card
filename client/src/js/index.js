@@ -10,7 +10,7 @@ import "../css/index.css";
 import { Tooltip, Toast, Popover } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { initDB, getDb, postDb } from "./database.js";
+import { initDB, getDb, postDb, deleteDb } from "./database.js";
 
 // import src/images files
 import Logo from "../images/logo.png";
@@ -62,4 +62,9 @@ form.addEventListener('submit', event => {
     toggleForm();
     // Reload the DOM
     fetchCards();
-});
+})
+    window.deleteCard = (e) => {
+        let id = parseInt(e.id);
+        deleteDb(id);
+        fetchCards();
+    };

@@ -10,7 +10,7 @@ import "../css/index.css";
 import { Tooltip, Toast, Popover } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { initDB, getDb, postDb, deleteDb } from "./database.js";
+import { initDB, getDb, postDb, deleteDb, updateDb } from "./database.js";
 
 // import src/images files
 import Logo from "../images/logo.png";
@@ -50,7 +50,11 @@ form.addEventListener('submit', event => {
     if (submitBtnToUpdate == false) {
         postDb(name, email, phone, profile);
     } else {
-
+        let name = document.getElementById("name").value;
+        let phone = document.getElementById("phone").value;
+        let email = document.getElementById("email").value;
+        let profile = document.querySelector('input[type="radio"]:checked').value;
+        updateDb(profileId, name, email, phone, profile);
         fetchCards();
         // Toggles the submit button back to POST functionality
         submitBtnToUpdate = false;
@@ -68,3 +72,18 @@ form.addEventListener('submit', event => {
         deleteDb(id);
         fetchCards();
     };
+
+window.editCard = (e) => {
+    profileId = parseInt(e.dataset.id);
+
+    let editName = e.dataset.name;
+    let editEmail = e.dataset.email;
+    let editPhone = e.dataset.phone;
+
+    document.getElementById("name").value = editName;
+    document.getElementById("email").value = editEmail;
+    document.getElementById("phone").value = editPhone;
+
+    form.style.display = "block";
+    submitBtnToUpdate = true;
+};

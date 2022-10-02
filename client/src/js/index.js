@@ -87,3 +87,9 @@ window.editCard = (e) => {
     form.style.display = "block";
     submitBtnToUpdate = true;
 };
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js');
+    })
+};

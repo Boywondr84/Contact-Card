@@ -34,6 +34,42 @@ const newContactButton = document.getElementById("new-contact");
 let submitBtnToUpdate = false;
 let profileId;
 
+// Install button functionality
+const installBtn = document.getElementById('installBtn');
+window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    installBtn.style.visibility = 'visible';
+    installBtn.addEventListener('click', () => {
+        event.prompt();
+        installBtn.setAttribute('disabled', true);
+        installBtn.textContent = 'Installed';
+    });
+});
+    window.addEventListener('appinstalled', (event) => {
+        console.log('App installed', event);
+    });
+
+
+// Share button functionality
+const shareData = {
+    title: 'Contact Cards',
+    text: 'Contact Cards',
+    url: 'https://developer.mozilla.org'
+}
+const shareBtn = document.getElementById('shareBtn');
+// const resultPara = document.querySelector('.result');
+
+
+// Share triggered by user activation
+shareBtn.addEventListener('click', async () => {
+    try {
+        await navigator.share(shareData);
+        // resultPara.textContent = 'Contact Cards shared successfully';
+    } catch (err) {
+        window.alert = `Error: ${err}`;
+    }
+});
+
 newContactButton.addEventListener('click', event => {
     toggleForm()
 })

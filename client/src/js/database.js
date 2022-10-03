@@ -20,7 +20,7 @@ export const initDB = async () => {
 export const getDb = async () => {
     console.log("GET from the database");
     const contactDb = await openDB('contact_db', 1);
-    const tx = contactDb.transaction('contact_db', 'readonly');
+    const tx = contactDb.transaction('contacts', 'readonly');
     const store = tx.objectStore('contacts');
     const request = store.getAll();
 
@@ -32,7 +32,7 @@ export const getDb = async () => {
 export const postDb = async (name, email, phone, profile) => {
     console.log("POST to the database");
     const contactDB = await openDB('contact_db', 1);
-    const tx = contactDB.transaction('contact_db', 'readwrite');
+    const tx = contactDB.transaction('contacts', 'readwrite');
     const store = tx.objectStore('contacts');
     const request = store.add({name: name, email: email, phone: phone, profile: profile});
     const result = await request;
@@ -43,7 +43,7 @@ export const deleteDb = async (id) => {
     console.log("DELETE from the database", id);
 
     const contactDB = await openDB('contact_db', 1);
-    const tx = contactDB.transaction('contact_db', 'readwrite');
+    const tx = contactDB.transaction('contacts', 'readwrite');
     const store = tx.objectStore('contacts');
     const request = store.delete(id);
     const result = await request;
@@ -54,7 +54,7 @@ export const deleteDb = async (id) => {
 export const updateDb = async (id, name, email, phone, profile) => {
     console.log("EDIT to the database");
     const contactDB = await openDB('contact_db', 1);
-    const tx = contactDB.transaction('contact_db', 'readwrite');
+    const tx = contactDB.transaction('contacts', 'readwrite');
     const store = tx.objectStore('contacts');
     const request = store.put({ id: id, name: name, email: email, phone: phone, profile: profile });
     const result = await request;
